@@ -1,0 +1,35 @@
+<!-- templates/analyze.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>감정 분석</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>감정 분석</h2>
+
+        <form action="/analyze" method="post">
+            <textarea name="diary" placeholder="일기를 입력하세요" rows="10" cols="50" required></textarea>
+            <br>
+            <button type="submit">감정 분석</button>
+        </form>
+
+        {% if emotion %}
+            <div class="result">
+                <h3>분석 결과</h3>
+                <p><strong>감정:</strong> {{ emotion }}</p>
+                <p><strong>조언:</strong> {{ advice }}</p>
+                <p><strong>점수:</strong> {{ score }}</p>
+            </div>
+        {% endif %}
+
+        <div class="nav">
+            <a href="/history">📜 분석 기록 보기</a> |
+            <a href="/stats">📊 감정 통계 보기</a> |
+            <a href="/logout">🔓 로그아웃</a>
+        </div>
+    </div>
+</body>
+</html>

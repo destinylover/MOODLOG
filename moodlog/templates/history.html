@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>분석 내역</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>분석 기록</h2>
+        {% if diaries %}
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>날짜</th>
+                        <th>일기 내용</th>
+                        <th>감정</th>
+                        <th>점수</th>
+                        <th>조언</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in diaries %}
+                        <tr>
+                            <td>{{ entry.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>{{ entry.content }}</td>
+                            <td>{{ entry.emotion }}</td>
+                            <td>{{ entry.score }}</td>
+                            <td>{{ entry.advice }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>기록된 분석이 없습니다.</p>
+        {% endif %}
+        <br>
+        <a href="/analyze">← 감정 분석으로 돌아가기</a>
+        <a href="/logout">로그아웃</a>
+    </div>
+</body>
+</html>

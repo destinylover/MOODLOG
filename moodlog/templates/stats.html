@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>감정 통계</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>감정 통계</h2>
+
+        {% if stats %}
+            <!-- 원형 차트 -->
+            <canvas id="emotionChart" width="400" height="400"></canvas>
+            <script>
+                const ctx = document.getElementById('emotionChart').getContext('2d');
+                const emotionChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: {{ stats.keys() | list | tojson }},
+                        datasets: [{
+                            label: '감정 분석 통계',
+                            data: {{ stats.values() | list | tojson }},
+                            backgroundColor: [
+                                '#FF6384', '#36A2EB', '#FFCE56', '#81C784',
+                                '#BA68C8', '#FF7043', '#4DD0E1', '#F06292'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            },
+                            title: {
+                                display: true,
+                                text: '감정 분석 결과 분포'
+                            }
+                        }
+                    }
+                });
+            </script>
+
+            <!-- 텍스트 목록 -->
+            <ul>
+                {% for emotion, count in stats.items() %}
+                    <li>{{ emotion }}: {{ count }}회</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>아직 감정 분석 기록이 없습니다.</p>
+        {% endif %}
+
+        <br>
+        <a href="/analyze">← 감정 분석으로 돌아가기</a>
+        <a href="/logout">로그아웃</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>홈 | 감정 분석기</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>감정 분석 웹앱</h1>
+
+    {% if user_id %}
+        <p>로그인 중: 사용자 ID {{ user_id }}</p>
+        <a href="/analyze">감정 분석하기</a> |
+        <a href="/history">기록 보기</a> |
+        <a href="/stats">감정 통계</a> |
+        <a href="/logout">로그아웃</a>
+    {% else %}
+        <a href="/login">로그인</a> |
+        <a href="/register">회원가입</a>
+    {% endif %}
+</div>
+</body>
+</html>

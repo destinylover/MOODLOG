@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>로그인</h2>
+
+        <!-- 에러 메시지 출력 -->
+        {% if error %}
+        <p class="error" style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        <form action="/login" method="post">
+            <input type="text" name="username" placeholder="사용자 이름" required>
+            <input type="password" name="password" placeholder="비밀번호" required>
+            <button type="submit">로그인</button>
+        </form>
+
+        <p>계정이 없으신가요? <a href="/register">회원가입</a></p>
+    </div>
+</body>
+</html>
