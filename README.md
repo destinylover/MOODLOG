@@ -1,4 +1,4 @@
-FASTAPI를 이용한 간단한 기록+감정분석 앱
+FASTAPI와 API를 이용한 간단한 기록+감정분석 앱
 
 
 감정 분석 및 피드백에는 OPENAI의 CHATGPT API를 사용.
