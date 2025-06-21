@@ -20,11 +20,6 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 
-@app.get("/")
-def health_check():
-    return {"status": "ok"}
-
-
 def get_db():
     db = SessionLocal()
     try:
@@ -102,7 +97,6 @@ def view_stats(request: Request, db: Session = Depends(get_db)):
     stats = crud.get_emotion_statistics(db, user_id)
     return templates.TemplateResponse("stats.html", {"request": request, "stats": stats})
 
-
 @app.get("/register", response_class=HTMLResponse)
 def register_form(request: Request):
     return templates.TemplateResponse("register.html", {"request": request})
@@ -123,3 +117,8 @@ def register(
     user = schemas.UserCreate(username=username, password=password)
     crud.create_user(db, user)
     return RedirectResponse(url="/login", status_code=303)
+
+# ✅ 헬스 체크 엔드포인트 (타겟 그룹에서 /health로 설정할 때 사용)
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
